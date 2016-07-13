@@ -86,7 +86,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="小丁爱折腾">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://xdizt.xyz/index.html">
 <meta property="og:site_name" content="小丁爱折腾">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小丁爱折腾">
@@ -110,7 +110,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://xdizt.xyz/"/>
 
   <title> 小丁爱折腾 </title>
 </head>
@@ -213,6 +213,102 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/uncategorized/解决本地视频没有画面.html" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T21:07:56+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近几天电脑播放本地视频的时候出现了只有声音没有画面的问题，经过一番摸索后，确认是显卡驱动的问题。但是平时使用当中都是好好的，怎么会突然出现问题呢？有可能是自己开启了win10自带的Hyper-V虚拟机有关，反正我开启了该服务播放视频就不正常了，问题产生的具体机制就说不上来了。</p>
+<p>##问题的具体表现<br>本人电脑为64位Windows 10本地视频打开后无法显示图像，画面为黑屏或者蓝屏，但视频的声音播放正常。无论是自带的Windows media player，电影与视频应用，还是potplayer都有这个问题，甚至win10商店下载的爱奇艺，优酷这些应用也有这种现象，而potplayer开启软解后就可以正常播放视频了（这也使我确定是显卡驱动引起的问题）。</p>
+<p>##解决方法<br>在此需要重新安装显卡驱动。<br>访问显卡或者电脑品牌的官网下载对应型号的显卡驱动（此处吐槽一下AMD官网的打开速度）。下载后点击安装，安装时会有让你选择解压目录，请记住目录路径，后面会用到。<br><img src="https://q0uodw.by3301.livefilestore.com/y3mVcPN1kMUDyCrI424ObkwgFX4Oxmwst6WsuARf_PiKvh-M1ef8PsiEFR1axy0HMbsz23JELXLLiPf7S_rnBpDBHWu2WEITnEkEAKPNx6lEQMp35_hfWLmHeCRbWQx-tEPpT-QShVK6EER3pBtSGnxOw?width=499&amp;height=388&amp;cropmode=none" alt=""><br>驱动程序安装完成后，发现问题还存在，经过一番折腾发现，需要在设备管理器里手动安装驱动。打开设备管理器，定位到显示适配器，右键显卡名称，选择更新驱动程序。<img src="https://aeyodw.by3301.livefilestore.com/y3mWaUW6YzM2Lfb5SUvL6TPhlIz4GeRibZ0r7FIarCwq60GUncwBjx1kgMWGgOa-HRsNMUPKh3uiD7Q3FvnoV_qvJt_DYFt3rXEBZxgC0d_Iu8_BSeVlqBS2Kco2CrNdMiSG01xjyrKwlwgkxehCKCBQw?width=660&amp;height=321&amp;cropmode=none" alt="">然后点击浏览计算机以查找驱动程序软件，在接下来的对话框中点击从计算机的设备驱动程序列表中选取。<br><img src="https://9kuodw.by3301.livefilestore.com/y3mPObknpZwEcz8LF0ZwlbwfA_0VbwUa8O9KJfaF5MEYijmGhj5HlKkg5TLXF9KInzymTEcbwv8Uf13MsXZBQ26jDgHoqx6lvltK5ueDRpeS0eU2kUXYXs1EHqefpZ3nVQ_M37X-ku8sOtl4uZFlRZBMQ?width=614&amp;height=492&amp;cropmode=none" alt=""><br><img src="https://9uuodw.by3301.livefilestore.com/y3mBQm6BVBNQtvnG0B8jtcKRVpaUypvwwOHDWbc_fJ3dTyxuhEGxAVmHDXO26g9CVfbxjHvlUsR23lLCBzfhl1mMNmiJtXZO74UNVdwFgsOWOm3n1h9D1RCsoFQj3k7LhhuvOrFm6WMs-yhtdi91zai-g?width=614&amp;height=513&amp;cropmode=none" alt=""><br>此时就要用到上面所说的路径了，点击从磁盘安装，定位到上述路径，在此路径里找到相应显卡驱动的inf文件（本人的在packages目录下），然后下一步完成驱动的安装。此时播放视频应该就恢复正常了。<br><img src="https://9euodw.by3301.livefilestore.com/y3mlqNhg0SO1t1QeN-pvXiymi3drkKnrTXbgDrsrMfrOycXSM1J8KOSWJjaq3M4teq-VygaKYRW2ghwEDBaI5JLv2CUCyPigp9OyvQKm7EtXvo8n0cz-aIA2cy6kJ0QePskfeD3h5rYqGqa58VLlLhTbA?width=614&amp;height=513&amp;cropmode=none" alt=""><br><img src="https://90snaw.by3301.livefilestore.com/y3mHg0Z990U7gydHaFssSrUGbNT92xBe3BaJVPhw2EeHbTFyEiSEOumV4MKHsLfS-7DQsdj3n85BvhDlME1L_ImJB33eOPd8uizXr4F8CImayaAPsB0d4E-GTLf92dJn50wkCLYIcTAAElvqoSed4HA8A?width=614&amp;height=513&amp;cropmode=none" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -357,7 +453,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
