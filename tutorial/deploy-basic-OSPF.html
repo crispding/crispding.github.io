@@ -97,7 +97,7 @@
 
 支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络">
 <meta property="og:image" content="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&height=618&cropmode=none">
-<meta property="og:updated_time" content="2016-08-30T14:09:05.455Z">
+<meta property="og:updated_time" content="2016-08-30T14:12:00.960Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置OSPF基本功能示例">
 <meta name="twitter:description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
@@ -322,9 +322,28 @@
 <li>配置各接口所属VLAN ID。</li>
 <li>配置各VLANIF接口的IP地址。</li>
 <li>在各Switch设备上使能OSPF，指定不同区域内的网段。</li>
-<li>查看路由表及数据库信息。  <h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><h3 id="SwitchA"><a href="#SwitchA" class="headerlink" title="SwitchA"></a>SwitchA</h3> sysname SwitchA<br> router id 1.1.1.1<br> vlan batch 10 20<br> interface Vlanif10<br>  ip address 192.168.0.1 255.255.255.0<br> interface Vlanif20<br>  ip address 192.168.1.1 255.255.255.0<br> interface GigabitEthernet0/0/1<br>  port hybrid pvid vlan 10<br>  port hybrid untagged vlan 10<br> interface GigabitEthernet0/0/2<br>  port hybrid pvid vlan 20<br>  port hybrid untagged vlan 20<br> ospf 1<br>  area 0.0.0.0<br>  network 192.168.0.0 0.0.0.255<br> area 0.0.0.1<br>  network 192.168.1.0 0.0.0.255<br> return</li>
+<li>查看路由表及数据库信息。  </li>
 </ol>
-<h3 id="SwitchB"><a href="#SwitchB" class="headerlink" title="SwitchB"></a>SwitchB</h3><pre><code>sysname SwitchB
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><h3 id="SwitchA"><a href="#SwitchA" class="headerlink" title="SwitchA"></a>SwitchA</h3><pre><code>sysname SwitchA
+router id 1.1.1.1
+vlan batch 10 20
+interface Vlanif10
+ ip address 192.168.0.1 255.255.255.0 
+interface Vlanif20
+ ip address 192.168.1.1 255.255.255.0
+interface GigabitEthernet0/0/1
+ port hybrid pvid vlan 10
+ port hybrid untagged vlan 10 
+interface GigabitEthernet0/0/2
+ port hybrid pvid vlan 20
+ port hybrid untagged vlan 20 
+ospf 1
+ area 0.0.0.0
+ network 192.168.0.0 0.0.0.255
+area 0.0.0.1
+ network 192.168.1.0 0.0.0.255
+return
+</code></pre><h3 id="SwitchB"><a href="#SwitchB" class="headerlink" title="SwitchB"></a>SwitchB</h3><pre><code>sysname SwitchB
 router id 2.2.2.2
 vlan batch 10 30
 interface Vlanif10
