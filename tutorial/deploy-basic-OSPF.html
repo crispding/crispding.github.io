@@ -86,24 +86,21 @@
 
 <meta name="description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
 
-
-支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络">
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置OSPF基本功能示例">
 <meta property="og:url" content="http://xdizt.xyz/tutorial/deploy-basic-OSPF.html">
 <meta property="og:site_name" content="小丁爱折腾">
 <meta property="og:description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
 
-
-支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络">
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
 <meta property="og:image" content="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&height=618&cropmode=none">
-<meta property="og:updated_time" content="2016-08-30T14:12:00.960Z">
+<meta property="og:updated_time" content="2016-08-30T14:20:08.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置OSPF基本功能示例">
 <meta name="twitter:description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
 
-
-支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络">
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
 <meta name="twitter:image" content="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&height=618&cropmode=none">
 
 
@@ -307,7 +304,6 @@
 
       
         <p>OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。<br>OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：</p>
-<blockquote>
 <ul>
 <li>支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带宽的占用。</li>
 <li>采用组播形式收发报文，这样就可以减少其它不运行OSPF交换机的负担。</li>
@@ -315,7 +311,6 @@
 <li>支持对等价路由进行负载分担。</li>
 <li>支持报文认证。  </li>
 </ul>
-</blockquote>
 <p>以下就以华为的组网模拟软件ensp来配置一个基本的OSPF示例。<br><a id="more"></a></p>
 <h2 id="组网需求"><a href="#组网需求" class="headerlink" title="组网需求"></a>组网需求</h2><p>如图1所示，所有的Switch都运行OSPF，并将整个自治系统划分为3个区域，其中SwitchA和SwitchB为ABR来转发区域之间的路由。<br>配置完成后，每台Switch都应学到自治系统内的到所有网段的路由。<br><img src="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&amp;height=618&amp;cropmode=none" alt="OSPF基本配置组网图"><br>图1 OSPF基本配置组网图  </p>
 <h2 id="配置思路"><a href="#配置思路" class="headerlink" title="配置思路"></a>配置思路</h2><ol>
@@ -324,106 +319,26 @@
 <li>在各Switch设备上使能OSPF，指定不同区域内的网段。</li>
 <li>查看路由表及数据库信息。  </li>
 </ol>
-<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><h3 id="SwitchA"><a href="#SwitchA" class="headerlink" title="SwitchA"></a>SwitchA</h3><pre><code>sysname SwitchA
-router id 1.1.1.1
-vlan batch 10 20
-interface Vlanif10
- ip address 192.168.0.1 255.255.255.0 
-interface Vlanif20
- ip address 192.168.1.1 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 10
- port hybrid untagged vlan 10 
-interface GigabitEthernet0/0/2
- port hybrid pvid vlan 20
- port hybrid untagged vlan 20 
-ospf 1
- area 0.0.0.0
- network 192.168.0.0 0.0.0.255
-area 0.0.0.1
- network 192.168.1.0 0.0.0.255
-return
-</code></pre><h3 id="SwitchB"><a href="#SwitchB" class="headerlink" title="SwitchB"></a>SwitchB</h3><pre><code>sysname SwitchB
-router id 2.2.2.2
-vlan batch 10 30
-interface Vlanif10
- ip address 192.168.0.2 255.255.255.0
-interface Vlanif30
- ip address 192.168.2.1 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 10
- port hybrid untagged vlan 10 
-interface GigabitEthernet0/0/2
- port hybrid pvid vlan 30
- port hybrid untagged vlan 30 
-ospf 1
- area 0.0.0.0
-  network 192.168.0.0 0.0.0.255
- area 0.0.0.2
-  network 192.168.2.0 0.0.0.255
-return
-</code></pre><h3 id="SwitchC"><a href="#SwitchC" class="headerlink" title="SwitchC"></a>SwitchC</h3><pre><code>sysname SwitchC
-router id 3.3.3.3
-vlan batch 20 40
-interface Vlanif20
- ip address 192.168.1.2 255.255.255.0
-interface Vlanif40
- ip address 172.16.1.1 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 20
- port hybrid untagged vlan 20 
-interface GigabitEthernet0/0/2
- port hybrid pvid vlan 40
- port hybrid untagged vlan 40 
-ospf 1
- area 0.0.0.1
-  network 192.168.1.0 0.0.0.255
-  network 172.16.1.0 0.0.0.255
-return
-</code></pre><h3 id="SwitchD"><a href="#SwitchD" class="headerlink" title="SwitchD"></a>SwitchD</h3><pre><code>sysname SwitchD
-router id 4.4.4.4
-vlan batch 30 50
-interface Vlanif30
- ip address 192.168.2.2 255.255.255.0
-interface Vlanif50
- ip address 172.17.1.1 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 30
- port hybrid untagged vlan 30 
-interface GigabitEthernet0/0/2
- port hybrid pvid vlan 50
- port hybrid untagged vlan 50 
-ospf 1
- area 0.0.0.2
-  network 192.168.2.0 0.0.0.255
-  network 172.17.1.0 0.0.0.255
-return
-</code></pre><h3 id="SwitchE"><a href="#SwitchE" class="headerlink" title="SwitchE"></a>SwitchE</h3><pre><code>sysname SwitchE
-router id 5.5.5.5
-vlan batch 40
-interface Vlanif40
- ip address 172.16.1.2 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 40
- port hybrid untagged vlan 40 
-ospf 1
- area 0.0.0.1
-  network 172.16.1.0 0.0.0.255
-return
-</code></pre><h3 id="SwitchF"><a href="#SwitchF" class="headerlink" title="SwitchF"></a>SwitchF</h3><pre><code>sysname SwitchF
-router id 6.6.6.6
-vlan batch 50
-interface Vlanif50
- ip address 172.17.1.2 255.255.255.0
-interface GigabitEthernet0/0/1
- port hybrid pvid vlan 50
- port hybrid untagged vlan 50 
-ospf 1
- area 0.0.0.2
-  network 172.17.1.0 0.0.0.255
-return
-</code></pre><h2 id="验证配置结果"><a href="#验证配置结果" class="headerlink" title="验证配置结果"></a>验证配置结果</h2><p>通过命令 <code>display ospf routing</code> 显示交换机上的OSPF路由信息，并使用ping来测试连通性。  </p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>华为31187092-S7700&amp;S9700 智能&amp;核心路由交换机 V200R003C00 产品文档  </p>
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><ul>
+<li><p>SwitchA<br>  sysname SwitchA<br>  router id 1.1.1.1<br>  vlan batch 10 20<br>  interface Vlanif10<br>   ip address 192.168.0.1 255.255.255.0<br>  interface Vlanif20<br>   ip address 192.168.1.1 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 10<br>   port hybrid untagged vlan 10<br>  interface GigabitEthernet0/0/2<br>   port hybrid pvid vlan 20<br>   port hybrid untagged vlan 20<br>  ospf 1<br>   area 0.0.0.0<br>   network 192.168.0.0 0.0.0.255<br>  area 0.0.0.1<br>   network 192.168.1.0 0.0.0.255<br>  return</p>
+</li>
+<li><p>SwitchB<br>  sysname SwitchB<br>  router id 2.2.2.2<br>  vlan batch 10 30<br>  interface Vlanif10<br>   ip address 192.168.0.2 255.255.255.0<br>  interface Vlanif30<br>   ip address 192.168.2.1 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 10<br>   port hybrid untagged vlan 10<br>  interface GigabitEthernet0/0/2<br>   port hybrid pvid vlan 30<br>   port hybrid untagged vlan 30<br>  ospf 1<br>   area 0.0.0.0</p>
+<pre><code>network 192.168.0.0 0.0.0.255
+</code></pre><p>   area 0.0.0.2</p>
+<pre><code>network 192.168.2.0 0.0.0.255
+</code></pre><p>  return</p>
+</li>
+<li>SwitchC<br>  sysname SwitchC<br>  router id 3.3.3.3<br>  vlan batch 20 40<br>  interface Vlanif20<br>   ip address 192.168.1.2 255.255.255.0<br>  interface Vlanif40<br>   ip address 172.16.1.1 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 20<br>   port hybrid untagged vlan 20<br>  interface GigabitEthernet0/0/2<br>   port hybrid pvid vlan 40<br>   port hybrid untagged vlan 40<br>  ospf 1<br>   area 0.0.0.1<pre><code>network 192.168.1.0 0.0.0.255
+network 172.16.1.0 0.0.0.255
+</code></pre>  return</li>
+<li>SwitchD<br>  sysname SwitchD<br>  router id 4.4.4.4<br>  vlan batch 30 50<br>  interface Vlanif30<br>   ip address 192.168.2.2 255.255.255.0<br>  interface Vlanif50<br>   ip address 172.17.1.1 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 30<br>   port hybrid untagged vlan 30<br>  interface GigabitEthernet0/0/2<br>   port hybrid pvid vlan 50<br>   port hybrid untagged vlan 50<br>  ospf 1<br>   area 0.0.0.2<pre><code>network 192.168.2.0 0.0.0.255
+network 172.17.1.0 0.0.0.255
+</code></pre>  return</li>
+<li>SwitchE<br>  sysname SwitchE<br>  router id 5.5.5.5<br>  vlan batch 40<br>  interface Vlanif40<br>   ip address 172.16.1.2 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 40<br>   port hybrid untagged vlan 40<br>  ospf 1<br>   area 0.0.0.1<pre><code>network 172.16.1.0 0.0.0.255
+</code></pre>  return</li>
+<li>SwitchF<br>  sysname SwitchF<br>  router id 6.6.6.6<br>  vlan batch 50<br>  interface Vlanif50<br>   ip address 172.17.1.2 255.255.255.0<br>  interface GigabitEthernet0/0/1<br>   port hybrid pvid vlan 50<br>   port hybrid untagged vlan 50<br>  ospf 1<br>   area 0.0.0.2<pre><code>network 172.17.1.0 0.0.0.255
+</code></pre>  return<h2 id="验证配置结果"><a href="#验证配置结果" class="headerlink" title="验证配置结果"></a>验证配置结果</h2>通过命令 <code>display ospf routing</code> 显示交换机上的OSPF路由信息，并使用ping来测试连通性。  <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>华为31187092-S7700&amp;S9700 智能&amp;核心路由交换机 V200R003C00 产品文档  </li>
+</ul>
 
       
     </div>
@@ -577,7 +492,7 @@ return
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#组网需求"><span class="nav-number">1.</span> <span class="nav-text">组网需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置思路"><span class="nav-number">2.</span> <span class="nav-text">配置思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置命令"><span class="nav-number">3.</span> <span class="nav-text">配置命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchA"><span class="nav-number">3.1.</span> <span class="nav-text">SwitchA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchB"><span class="nav-number">3.2.</span> <span class="nav-text">SwitchB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchC"><span class="nav-number">3.3.</span> <span class="nav-text">SwitchC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchD"><span class="nav-number">3.4.</span> <span class="nav-text">SwitchD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchE"><span class="nav-number">3.5.</span> <span class="nav-text">SwitchE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SwitchF"><span class="nav-number">3.6.</span> <span class="nav-text">SwitchF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证配置结果"><span class="nav-number">4.</span> <span class="nav-text">验证配置结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#组网需求"><span class="nav-number">1.</span> <span class="nav-text">组网需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置思路"><span class="nav-number">2.</span> <span class="nav-text">配置思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置命令"><span class="nav-number">3.</span> <span class="nav-text">配置命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证配置结果"><span class="nav-number">4.</span> <span class="nav-text">验证配置结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
           </div>
         </section>
