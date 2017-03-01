@@ -1,0 +1,639 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络,通信," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
+
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置OSPF基本功能示例">
+<meta property="og:url" content="http://xdizt.xyz/essays/deploy-basic-OSPF.html">
+<meta property="og:site_name" content="小丁爱折腾">
+<meta property="og:description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
+
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
+<meta property="og:image" content="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&height=618&cropmode=none">
+<meta property="og:updated_time" content="2017-03-01T14:25:20.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置OSPF基本功能示例">
+<meta name="twitter:description" content="OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：
+
+支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带">
+<meta name="twitter:image" content="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&height=618&cropmode=none">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://xdizt.xyz/essays/deploy-basic-OSPF.html"/>
+
+  <title> 配置OSPF基本功能示例 | 小丁爱折腾 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小丁爱折腾</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个瞎扯淡的地方</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                配置OSPF基本功能示例
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T22:12:46+08:00" content="2016-08-18">
+              2016-08-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/essays/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OSPF是IETF组织开发的一个基于链路状态的内部网关协议，广泛应用在接入网和城域网中。<br>OSPF作为基于链路状态的协议，能够解决RIP所面临的诸多问题。此外，OSPF还有以下优点：</p>
+<ul>
+<li>支持区域划分，允许自治系统的网络被划分成区域来管理，设备的链路状态数据库仅需和所在区域的其他设备保持一致。链路状态数据库的减小降低了对设备内存的占用和CPU的消耗。同时，需要在区域间传送的路由信息的减小，降低了网络带宽的占用。</li>
+<li>采用组播形式收发报文，这样就可以减少其它不运行OSPF交换机的负担。</li>
+<li>支持无类型域间选路（CIDR）。</li>
+<li>支持对等价路由进行负载分担。</li>
+<li>支持报文认证。  </li>
+</ul>
+<p>以下就以华为的组网模拟软件ensp来配置一个基本的OSPF示例。<br><a id="more"></a></p>
+<h2 id="组网需求"><a href="#组网需求" class="headerlink" title="组网需求"></a>组网需求</h2><p>如图1所示，所有的Switch都运行OSPF，并将整个自治系统划分为3个区域，其中SwitchA和SwitchB为ABR来转发区域之间的路由。<br>配置完成后，每台Switch都应学到自治系统内的到所有网段的路由。<br><img src="https://njvcsa.by3301.livefilestore.com/y3mQkP6Sx65Jsyy5L_MstXSlP0ENSklq-GNJ8L45qkZOAvTqoEfQjdX7hp92FIEDX1v6XVubtfMtjI4J7TxTpGdWrc10QBrByPEtLKruVVwdHAw-zP-MrrDQM_4ipIMl7fa-bL29QULiNgef59ttIaCzbQrg9gDCSXxmo7ABxPRQ2k?width=829&amp;height=618&amp;cropmode=none" alt="OSPF基本配置组网图"><br>图1 OSPF基本配置组网图  </p>
+<h2 id="配置思路"><a href="#配置思路" class="headerlink" title="配置思路"></a>配置思路</h2><ol>
+<li>配置各接口所属VLAN ID。</li>
+<li>配置各VLANIF接口的IP地址。</li>
+<li>在各Switch设备上使能OSPF，指定不同区域内的网段。</li>
+<li>查看路由表及数据库信息。  </li>
+</ol>
+<h2 id="配置命令"><a href="#配置命令" class="headerlink" title="配置命令"></a>配置命令</h2><ul>
+<li><p>SwitchA</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchA</div><div class="line">#</div><div class="line">router id 1.1.1.1</div><div class="line">#</div><div class="line">vlan batch 10 20</div><div class="line">#</div><div class="line">interface Vlanif10</div><div class="line"> ip address 192.168.0.1 255.255.255.0</div><div class="line">#</div><div class="line">interface Vlanif20</div><div class="line"> ip address 192.168.1.1 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/1</div><div class="line"> port hybrid pvid vlan 10</div><div class="line"> port hybrid untagged vlan 10</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/2</div><div class="line"> port hybrid pvid vlan 20</div><div class="line"> port hybrid untagged vlan 20</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.0</div><div class="line">  network 192.168.0.0 0.0.0.255</div><div class="line"> area 0.0.0.1</div><div class="line">  network 192.168.1.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+<li><p>SwitchB</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchB</div><div class="line">#</div><div class="line">router id 2.2.2.2</div><div class="line">#</div><div class="line">vlan batch 10 30</div><div class="line">#</div><div class="line">interface Vlanif10</div><div class="line"> ip address 192.168.0.2 255.255.255.0</div><div class="line">#</div><div class="line">interface Vlanif30</div><div class="line"> ip address 192.168.2.1 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/1</div><div class="line"> port hybrid pvid vlan 10</div><div class="line"> port hybrid untagged vlan 10</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/2</div><div class="line"> port hybrid pvid vlan 30</div><div class="line"> port hybrid untagged vlan 30</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.0</div><div class="line">  network 192.168.0.0 0.0.0.255</div><div class="line"> area 0.0.0.2</div><div class="line">  network 192.168.2.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+<li><p>SwitchC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchC</div><div class="line">#</div><div class="line">router id 3.3.3.3</div><div class="line">#</div><div class="line">vlan batch 20 40</div><div class="line">#</div><div class="line">interface Vlanif20</div><div class="line"> ip address 192.168.1.2 255.255.255.0</div><div class="line">#</div><div class="line">interface Vlanif40</div><div class="line"> ip address 172.16.1.1 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/1</div><div class="line"> port hybrid pvid vlan 20</div><div class="line"> port hybrid untagged vlan 20</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/2</div><div class="line"> port hybrid pvid vlan 40</div><div class="line"> port hybrid untagged vlan 40</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.1</div><div class="line">  network 192.168.1.0 0.0.0.255</div><div class="line">  network 172.16.1.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+<li><p>SwitchD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchD</div><div class="line">#</div><div class="line">router id 4.4.4.4</div><div class="line">#</div><div class="line">vlan batch 30 50</div><div class="line">#</div><div class="line">interface Vlanif30</div><div class="line"> ip address 192.168.2.2 255.255.255.0</div><div class="line">#</div><div class="line">interface Vlanif50</div><div class="line"> ip address 172.17.1.1 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/1</div><div class="line"> port hybrid pvid vlan 30</div><div class="line"> port hybrid untagged vlan 30</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/2</div><div class="line"> port hybrid pvid vlan 50</div><div class="line"> port hybrid untagged vlan 50</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.2</div><div class="line">  network 192.168.2.0 0.0.0.255</div><div class="line">  network 172.17.1.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+<li><p>SwitchE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchE</div><div class="line">#</div><div class="line">router id 5.5.5.5</div><div class="line">#</div><div class="line">vlan batch 40</div><div class="line">#</div><div class="line">interface Vlanif40</div><div class="line"> ip address 172.16.1.2 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet0/0/1</div><div class="line"> port hybrid pvid vlan 40</div><div class="line"> port hybrid untagged vlan 40</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.1</div><div class="line">  network 172.16.1.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+<li><p>SwitchF</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">sysname SwitchF</div><div class="line">#</div><div class="line">router id 6.6.6.6</div><div class="line">#</div><div class="line">vlan batch 50</div><div class="line">#</div><div class="line">interface Vlanif50</div><div class="line"> ip address 172.17.1.2 255.255.255.0</div><div class="line">#</div><div class="line">interface GigabitEthernet1/0/1</div><div class="line"> port hybrid pvid vlan 50</div><div class="line"> port hybrid untagged vlan 50</div><div class="line">#</div><div class="line">ospf 1</div><div class="line"> area 0.0.0.2</div><div class="line">  network 172.17.1.0 0.0.0.255</div><div class="line">#</div><div class="line">return</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="验证配置结果"><a href="#验证配置结果" class="headerlink" title="验证配置结果"></a>验证配置结果</h2><p>通过命令 <code>display ospf routing</code> 显示交换机上的OSPF路由信息，并使用ping来测试连通性。  </p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>华为31187092-S7700&amp;S9700 智能&amp;核心路由交换机 V200R003C00 产品文档。  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag">#网络</a>
+          
+            <a href="/tags/通信/" rel="tag">#通信</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/essays/solve-local-playback-with-no-picture.html" rel="next" title="解决本地视频没有画面的问题">
+                <i class="fa fa-chevron-left"></i> 解决本地视频没有画面的问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/essays/email-arrangement-and-management.html" rel="prev" title="个人邮箱管理术">
+                个人邮箱管理术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/large/40eb2109gw1f5tsbu6sebj20f00f0mzr.jpg"
+               alt="xiao_dg" />
+          <p class="site-author-name" itemprop="name">xiao_dg</p>
+          <p class="site-description motion-element" itemprop="description">“最糟糕的还没有到来。最糟糕的才刚刚开始。永远也没有幸福的结局。” —— 山姆威尔</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#组网需求"><span class="nav-number">1.</span> <span class="nav-text">组网需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置思路"><span class="nav-number">2.</span> <span class="nav-text">配置思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置命令"><span class="nav-number">3.</span> <span class="nav-text">配置命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证配置结果"><span class="nav-number">4.</span> <span class="nav-text">验证配置结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiao_dg</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
