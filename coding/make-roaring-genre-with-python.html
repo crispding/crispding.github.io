@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="互联网,邮箱,安全," />
+  <meta name="keywords" content="python,分词,咆哮体," />
 
 
 
@@ -87,18 +87,21 @@
 
 
 
-<meta name="description" content="最近经常有iPhone的账户被锁定以及iOS日历应用里广告泛滥的新闻，原因很大程度上是邮箱地址泄露以至于账户密码被撞库破解。这就引出了本文的命题，如何管理个人的邮箱账号安全。一句话概述就是：拥有多个邮箱地址，并对此按用途进行分类管理。下面介绍下我对此的理解，以及本人的邮箱管理术。">
+<meta name="description" content="又好久没有更新了，没办法，懒癌晚期患者……
+不过近日学习了 python 的 jieba 分词组件，发觉可以用它写个生成咆哮体的程序，正好可以练练手。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="个人邮箱管理术">
-<meta property="og:url" content="http://xdizt.xyz/essays/email-arrangement-and-management.html">
+<meta property="og:title" content="使用 python 生成咆哮体">
+<meta property="og:url" content="http://xdizt.xyz/coding/make-roaring-genre-with-python.html">
 <meta property="og:site_name" content="小丁爱折腾">
-<meta property="og:description" content="最近经常有iPhone的账户被锁定以及iOS日历应用里广告泛滥的新闻，原因很大程度上是邮箱地址泄露以至于账户密码被撞库破解。这就引出了本文的命题，如何管理个人的邮箱账号安全。一句话概述就是：拥有多个邮箱地址，并对此按用途进行分类管理。下面介绍下我对此的理解，以及本人的邮箱管理术。">
-<meta property="og:image" content="https://ktuklw.by3301.livefilestore.com/y3m__rtW44z81ZGuomOmessACWk5HwJiKqsC6i9Fy-WhfdTX9-1uxxzV1Wu-JuDyM7YNhbtIc05Qr8NnQqvrJFcTGOBqN2b8wM4dQXaknyx00ehIqst2yFSW7QuzyoGXko7_3pOH_U8pvbDv2dFB2wHpuyf3MJ6SUVeCO20KKstrNo?width=1024&height=682&cropmode=none">
-<meta property="og:updated_time" content="2017-03-01T14:24:50.699Z">
+<meta property="og:description" content="又好久没有更新了，没办法，懒癌晚期患者……
+不过近日学习了 python 的 jieba 分词组件，发觉可以用它写个生成咆哮体的程序，正好可以练练手。">
+<meta property="og:image" content="https://ppksuq.by3301.livefilestore.com/y4m-gX9jewOMYDn2P-LU6VQ4dlXIf3BDEAXIhv-MkJ5i0yXQfyXj1LNtzPdg15eiANFoTZyOVekRuJ9qink48oxQayLk-Wz0nI1JdWu8_WSLdjyU3Ii-56U_yy3zXWYC21RhM-GinuaeXrmB3Bkw_hZOt3-KdufbAkOeLJvJkUgFjNqn6ZaDLFUqaKsJ2fsSTyDCI5OoPy9si1kQUYzS2m_gw?width=953&height=263&cropmode=none">
+<meta property="og:updated_time" content="2018-02-27T07:32:10.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="个人邮箱管理术">
-<meta name="twitter:description" content="最近经常有iPhone的账户被锁定以及iOS日历应用里广告泛滥的新闻，原因很大程度上是邮箱地址泄露以至于账户密码被撞库破解。这就引出了本文的命题，如何管理个人的邮箱账号安全。一句话概述就是：拥有多个邮箱地址，并对此按用途进行分类管理。下面介绍下我对此的理解，以及本人的邮箱管理术。">
-<meta name="twitter:image" content="https://ktuklw.by3301.livefilestore.com/y3m__rtW44z81ZGuomOmessACWk5HwJiKqsC6i9Fy-WhfdTX9-1uxxzV1Wu-JuDyM7YNhbtIc05Qr8NnQqvrJFcTGOBqN2b8wM4dQXaknyx00ehIqst2yFSW7QuzyoGXko7_3pOH_U8pvbDv2dFB2wHpuyf3MJ6SUVeCO20KKstrNo?width=1024&height=682&cropmode=none">
+<meta name="twitter:title" content="使用 python 生成咆哮体">
+<meta name="twitter:description" content="又好久没有更新了，没办法，懒癌晚期患者……
+不过近日学习了 python 的 jieba 分词组件，发觉可以用它写个生成咆哮体的程序，正好可以练练手。">
+<meta name="twitter:image" content="https://ppksuq.by3301.livefilestore.com/y4m-gX9jewOMYDn2P-LU6VQ4dlXIf3BDEAXIhv-MkJ5i0yXQfyXj1LNtzPdg15eiANFoTZyOVekRuJ9qink48oxQayLk-Wz0nI1JdWu8_WSLdjyU3Ii-56U_yy3zXWYC21RhM-GinuaeXrmB3Bkw_hZOt3-KdufbAkOeLJvJkUgFjNqn6ZaDLFUqaKsJ2fsSTyDCI5OoPy9si1kQUYzS2m_gw?width=953&height=263&cropmode=none">
 
 
 
@@ -126,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://xdizt.xyz/essays/email-arrangement-and-management.html"/>
+  <link rel="canonical" href="http://xdizt.xyz/coding/make-roaring-genre-with-python.html"/>
 
 
 
 
 
-  <title> 个人邮箱管理术 | 小丁爱折腾 </title>
+  <title> 使用 python 生成咆哮体 | 小丁爱折腾 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +254,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xdizt.xyz/essays/email-arrangement-and-management.html">
+    <link itemprop="mainEntityOfPage" href="http://xdizt.xyz/coding/make-roaring-genre-with-python.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiao_dg">
@@ -272,7 +275,7 @@
             
             
               
-                个人邮箱管理术
+                使用 python 生成咆哮体
               
             
           </h1>
@@ -287,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-18T21:59:03+08:00">
-                2017-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T11:56:26+08:00">
+                2018-02-27
               </time>
             
 
@@ -310,8 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/essays/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -345,12 +348,10 @@
       
 
       
-        <p><img src="https://ktuklw.by3301.livefilestore.com/y3m__rtW44z81ZGuomOmessACWk5HwJiKqsC6i9Fy-WhfdTX9-1uxxzV1Wu-JuDyM7YNhbtIc05Qr8NnQqvrJFcTGOBqN2b8wM4dQXaknyx00ehIqst2yFSW7QuzyoGXko7_3pOH_U8pvbDv2dFB2wHpuyf3MJ6SUVeCO20KKstrNo?width=1024&amp;height=682&amp;cropmode=none" alt="Email"><br>最近经常有iPhone的账户被锁定以及iOS日历应用里广告泛滥的新闻，原因很大程度上是邮箱地址泄露以至于账户密码被撞库破解。这就引出了本文的命题，如何管理个人的邮箱账号安全。<br>一句话概述就是：拥有多个邮箱地址，并对此按用途进行分类管理。下面介绍下我对此的理解，以及本人的邮箱管理术。<br><a id="more"></a></p>
-<h2 id="我们用邮箱做什么"><a href="#我们用邮箱做什么" class="headerlink" title="我们用邮箱做什么"></a>我们用邮箱做什么</h2><p>在国内拥有如此发达社交网络的前提下，邮箱对于我们作为日常社交沟通的功能就没有那么重要了。因此，我总结的邮箱用途有以下两方面：</p>
-<ol>
-<li>各种网站和网络服务的账户和安全绑定；</li>
-<li>工作往来联络。<h2 id="使用哪款邮箱服务"><a href="#使用哪款邮箱服务" class="headerlink" title="使用哪款邮箱服务"></a>使用哪款邮箱服务</h2>明白邮箱的用途，下一步就是选择邮箱服务了。目前常用的邮箱服务提供商，国内的有QQ邮箱，网易邮箱，以及其它门户网站和移动运营商提供的邮箱，国外的有微软的outlook（原hotmail）以及Google的Gmail。<br>怎样从繁多的邮箱服务里选择自己最适合的呢？这需要根据自己使用邮箱的目的进行分门别类的管理。<h2 id="邮箱地址分类管理"><a href="#邮箱地址分类管理" class="headerlink" title="邮箱地址分类管理"></a>邮箱地址分类管理</h2>邮箱的分类管理需要一个大前提：不要用一个邮箱地址干所有的事（废话，就一个邮箱还分什么类啊）。申请多个邮箱（最起码三个），然后按用途和优先级进行管理。邮箱管理的原则是要区分好对公或者私有，以及使用的频率。下面就介绍下根据重要性的程度的不同，我对邮箱按需进行管理的理解：<h3 id="工作邮箱"><a href="#工作邮箱" class="headerlink" title="工作邮箱"></a>工作邮箱</h3>我们日常办公当中选择邮箱服务，基本上是要“随大流“的，大家用什么，自己就得用什么。而在我本人的日常工作当中，由于经常通过电话与设备厂商联系，厂商通常会通过邮箱发送资料给我，此时手机邮箱就是一个比较好的选择（在电话里报字母是挺让人奔溃的）。比如QQ邮箱就可以设置手机邮箱，设置完之后，你就拥有一个形如”手机号码@qq.com“的邮箱地址了。现在可能有人会问，干嘛不直接使用QQ号码的邮箱地址呢？这里要强调的是，能少泄露个人信息，就少泄露，互联网时代，尤其要注重信息安全。<h3 id="重要账户邮箱"><a href="#重要账户邮箱" class="headerlink" title="重要账户邮箱"></a>重要账户邮箱</h3>那些保存有大量个人真实信息的，以及个人资产的互联网服务，比如说社交网站，支付宝，网上银行，Apple ID，请务必使用一个独立的，安全系数高的邮箱服务，并且这个地址不在其它网络服务上使用。我的选择是outlook。<h3 id="次要账户邮箱"><a href="#次要账户邮箱" class="headerlink" title="次要账户邮箱"></a>次要账户邮箱</h3>有些网站，比如说某些资源论坛，注册登录后不知道下一次什么时候还会回来逛逛。这种网络账户跟一次性没什么区别，我们可以用自己也不太常用的邮箱来使用这些类网络服务。那些总是往收件箱发广告的邮箱挺合适的。<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>拥有多个邮箱账户是不是很难打理？其实像上面提到的QQ邮箱，除了QQ号码邮箱和手机号码邮箱外，还可以申请一个字母邮箱，这样加起来，在同一个邮箱服务上就可以使用三个地址了。而比如说outlook可以设置别名邮箱，这样也可以在同一服务下使用多个邮箱地址。总之互联网公司总是为我们提供多样化的服务，让我们更从容的面对生活。  </li>
-</ol>
+        <p>又好久没有更新了，没办法，懒癌晚期患者……</p>
+<p>不过近日学习了 python 的 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="external">jieba</a> 分词组件，发觉可以用它写个生成咆哮体的程序，正好可以练练手。<br><img src="https://ppksuq.by3301.livefilestore.com/y4m-gX9jewOMYDn2P-LU6VQ4dlXIf3BDEAXIhv-MkJ5i0yXQfyXj1LNtzPdg15eiANFoTZyOVekRuJ9qink48oxQayLk-Wz0nI1JdWu8_WSLdjyU3Ii-56U_yy3zXWYC21RhM-GinuaeXrmB3Bkw_hZOt3-KdufbAkOeLJvJkUgFjNqn6ZaDLFUqaKsJ2fsSTyDCI5OoPy9si1kQUYzS2m_gw?width=953&amp;height=263&amp;cropmode=none" alt="咆哮体输出"><br><a id="more"></a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> jieba</div><div class="line"></div><div class="line">r = <span class="string">'[’!"#$%&amp;\'()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~，。！？‘’“”；：\n]+'</span>    <span class="comment">#正则表达式，用于去除标点</span></div><div class="line">output = <span class="string">''</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'string.txt'</span>, <span class="string">'r'</span>, encoding=<span class="string">'UTF-8'</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> f:   <span class="comment">#程序文件同目录下的 string.txt 文件写入需要转换的文本</span></div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</div><div class="line">        line = re.sub(r, <span class="string">''</span>, line)</div><div class="line">        cut = jieba.cut(line)</div><div class="line">        result = <span class="string">"！"</span>.join(cut) + <span class="string">"！！！\n"</span></div><div class="line">        output += result</div><div class="line">        print(result, end=<span class="string">''</span>)</div><div class="line"></div><div class="line"><span class="keyword">with</span> open(<span class="string">'output.txt'</span>, <span class="string">'w'</span>, encoding=<span class="string">'UTF-8'</span>) <span class="keyword">as</span> fw:   <span class="comment">#将转换结果写入 output.txt 文件</span></div><div class="line">    fw.write(output)</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>将代码存入 python 文件（比如 RoaringGenre.py ），同目录下的 string.txt 写入待转换文本，然后在命令提示符下运行本程序，生成结果。</p>
 
       
     </div>
@@ -380,11 +381,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/互联网/" rel="tag"># 互联网</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/邮箱/" rel="tag"># 邮箱</a>
+            <a href="/tags/分词/" rel="tag"># 分词</a>
           
-            <a href="/tags/安全/" rel="tag"># 安全</a>
+            <a href="/tags/咆哮体/" rel="tag"># 咆哮体</a>
           
         </div>
       
@@ -397,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/essays/deploy-basic-OSPF.html" rel="next" title="配置OSPF基本功能示例">
-                <i class="fa fa-chevron-left"></i> 配置OSPF基本功能示例
+              <a href="/essays/use-fail2ban-to-prevent-illegal-ssh-login.html" rel="next" title="使用 fail2ban 防止 ssh 暴力破解">
+                <i class="fa fa-chevron-left"></i> 使用 fail2ban 防止 ssh 暴力破解
               </a>
             
           </div>
@@ -406,10 +407,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/coding/python-hash-calcutate.html" rel="prev" title="使用python计算文件的hash值并验证">
-                使用python计算文件的hash值并验证 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#我们用邮箱做什么"><span class="nav-number">1.</span> <span class="nav-text">我们用邮箱做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用哪款邮箱服务"><span class="nav-number">2.</span> <span class="nav-text">使用哪款邮箱服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邮箱地址分类管理"><span class="nav-number">3.</span> <span class="nav-text">邮箱地址分类管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作邮箱"><span class="nav-number">3.1.</span> <span class="nav-text">工作邮箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重要账户邮箱"><span class="nav-number">3.2.</span> <span class="nav-text">重要账户邮箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#次要账户邮箱"><span class="nav-number">3.3.</span> <span class="nav-text">次要账户邮箱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li></ol></div>
             
 
           </div>
